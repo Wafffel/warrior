@@ -13,6 +13,7 @@ public class Team {
     private Syberia arena;
     public Team(CharacterClass... members) {
         teamMembers = new CharacterClass[members.length];
+
         for (int i = 0; i < teamMembers.length; i++) {
             teamMembers[i] = members[i];
         }
