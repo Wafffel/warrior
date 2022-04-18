@@ -15,11 +15,12 @@ public abstract class CharacterClass implements BaseClass {
     private String name;
     private int maxHealthPoints;
     private int maxManaPoints;
-    private int leftKey, rightKey, upKey, downKey, leftAttackKey,rightAttackKey;
+    private int leftKey, rightKey, upKey, downKey, leftAttackKey,rightAttackKey, abilityKey;
     protected  String className;
+    private int minRange, maxRange;
 
     public CharacterClass(
-            String name, int x, int y, int leftKey, int rightKey, int upKey, int downKey, int leftAttackKey, int rightAttackKey) {
+            String name, int x, int y, int leftKey, int rightKey, int upKey, int downKey, int leftAttackKey, int rightAttackKey, int minRange, int maxRange, int abilityKey) {
         this.number = ++playerCount;
         occupiedCells[x][y] = this.number;
         this.name = name;
@@ -31,6 +32,9 @@ public abstract class CharacterClass implements BaseClass {
         this.downKey = downKey;
         this.leftAttackKey = leftAttackKey;
         this.rightAttackKey = rightAttackKey;
+        this.minRange = minRange;
+        this.maxRange = maxRange;
+        this.abilityKey = abilityKey;
     }
 
     public void setHealthPoints(int healthPoints) {
@@ -125,7 +129,7 @@ public abstract class CharacterClass implements BaseClass {
 
     @Override
     public void restoreHealth(int amount) {
-        setHealthPoints(this.getMaxHealthPoints() + amount);
+        setHealthPoints(this.getHealthPoints() + amount);
     }
 
     @Override
@@ -245,4 +249,18 @@ public abstract class CharacterClass implements BaseClass {
     public abstract void up();
 
     public abstract void down();
+
+    public int getMaxRange() {
+        return maxRange;
+    }
+
+    public int getMinRange() {
+        return minRange;
+    }
+
+    public void ability() {}
+
+    public int getAbilityKey() {
+        return abilityKey;
+    }
 }

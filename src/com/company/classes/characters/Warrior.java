@@ -4,8 +4,8 @@ import com.company.classes.AttackType;
 import com.company.classes.CharacterClass;
 
 public class Warrior extends CharacterClass {
-   public Warrior(String name, int x, int y, int leftKey, int rightKey, int upKey, int downKey, int leftAttackKey, int rightAttackKey) {
-        super(name, x, y, leftKey, rightKey, upKey, downKey, leftAttackKey, rightAttackKey);
+   public Warrior(String name, int x, int y, int leftKey, int rightKey, int upKey, int downKey, int leftAttackKey, int rightAttackKey, int abilityKey) {
+        super(name, x, y, leftKey, rightKey, upKey, downKey, leftAttackKey, rightAttackKey,1,1, abilityKey);
         this.setAttackAmount(100);
        this.setMaxHealthPoints(1000);
         setHealthPoints(1000);

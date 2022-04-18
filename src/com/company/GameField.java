@@ -55,8 +55,11 @@ public class GameField extends JPanel {
                 if (key == player.getLeftAttackKey()) {
                     player.setAttackLeftImage();
 
-                    if (player.getX() > 40 && CharacterClass.occupiedCells[player.getX() - 40][player.getY()] > 0) {
-                        player.attack(players[(CharacterClass.occupiedCells[player.getX() - 40][player.getY()])-1]);
+                    if (player.getX() >= 40 && CharacterClass.occupiedCells[player.getX() - 40*player.getMinRange()][player.getY()]>0) {
+                        player.attack(players[(CharacterClass.occupiedCells[player.getX() - 40*player.getMinRange()][player.getY()])-1]);
+                    } else if (CharacterClass.occupiedCells[player.getX() - 40*player.getMaxRange()][player.getY()]>0)
+                    {
+                        player.attack(players[(CharacterClass.occupiedCells[player.getX() - 40*player.getMaxRange()][player.getY()])-1]);
                     }
 
                     //timer
@@ -73,8 +76,11 @@ public class GameField extends JPanel {
                 if (key == player.getRightAttackKey()) {
                     player.setAttackRightImage();
 
-                    if (player.getX() < 300 && CharacterClass.occupiedCells[player.getX() + 40][player.getY()] > 0) {
-                        player.attack(players[(CharacterClass.occupiedCells[player.getX() + 40][player.getY()])-1]);
+                    if (player.getX() < 300 && CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()]>0) {
+                        player.attack(players[(CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()])-1]);
+                    } else if (CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()]>0)
+                    {
+                        player.attack(players[(CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()])-1]);
                     }
 
                     //timer
@@ -87,6 +93,9 @@ public class GameField extends JPanel {
                                 }
                             }, 200
                     );
+                }
+                if (key == player.getAbilityKey()){
+                    player.ability();
                 }
             }
             repaint();
