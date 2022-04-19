@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.classes.CharacterClass;
+import com.company.classes.MonsterClass;
 import com.company.classes.arenas.Syberia;
 
 import javax.swing.*;
@@ -11,11 +12,12 @@ import java.awt.event.KeyEvent;
 public class GameField extends JPanel {
     private Team team;
     private CharacterClass[] players;
+    private MonsterClass[] monsters;
     private Syberia map = new Syberia();
-    public GameField(Team team) {
+    public GameField(Team team, MonsterClass[] monsters) {
         this.team = team;
         this.players = team.getTeamMembers();
-
+        this.monsters = monsters;
         setFocusable(true);
         addKeyListener(new FieldKeyListener());
     }
@@ -32,6 +34,10 @@ public class GameField extends JPanel {
         }
         for (int[] wall : map.getWallLocation()) {
             g.drawImage(map.getBaseImage(), wall[0], wall[1], this);
+        }
+        for (MonsterClass monster : monsters) {
+            g.drawImage(monster.getImage(), monster.getX(), monster.getY(), this);
+            g.drawString(""+monster.getHealth(), monster.getX(), monster.getY()+12);
         }
     }
 
@@ -62,11 +68,14 @@ public class GameField extends JPanel {
                 if (key == player.getLeftAttackKey()) {
                     player.setAttackLeftImage();
 
-                    if (player.getX() >= 0+(40*player.getMinRange()) && CharacterClass.occupiedCells[player.getX() - 40*player.getMinRange()][player.getY()]>0) {
+                    if (player.getX() >= 0+(40*player.getMinRange()) && CharacterClass.occupiedCells[player.getX() - 40*player.getMinRange()][player.getY()]>0 && CharacterClass.occupiedCells[player.getX() - 40*player.getMinRange()][player.getY()]<5) {
                         player.attack(players[(CharacterClass.occupiedCells[player.getX() - 40*player.getMinRange()][player.getY()])-1]);
-                    } else if (player.getX() >= 0+(40*player.getMaxRange()) &&CharacterClass.occupiedCells[player.getX() - 40*player.getMaxRange()][player.getY()]>0)
-                    {
+                    } else if (player.getX() >= 0+(40*player.getMinRange()) && CharacterClass.occupiedCells[player.getX() - 40*player.getMinRange()][player.getY()]>5) {
+                        player.attack(monsters[(CharacterClass.occupiedCells[player.getX() - 40*player.getMinRange()][player.getY()])-6]);
+                    } else if (player.getX() >= 0+(40*player.getMaxRange()) && CharacterClass.occupiedCells[player.getX() - 40*player.getMaxRange()][player.getY()]>0 && CharacterClass.occupiedCells[player.getX() - 40*player.getMaxRange()][player.getY()]<5) {
                         player.attack(players[(CharacterClass.occupiedCells[player.getX() - 40*player.getMaxRange()][player.getY()])-1]);
+                    } else if (player.getX() >= 0+(40*player.getMaxRange()) && CharacterClass.occupiedCells[player.getX() - 40*player.getMaxRange()][player.getY()]>5) {
+                        player.attack(monsters[(CharacterClass.occupiedCells[player.getX() - 40*player.getMaxRange()][player.getY()])-6]);
                     }
 
                     //timer
@@ -88,6 +97,16 @@ public class GameField extends JPanel {
                     } else if (player.getX() <= 320-(40*player.getMaxRange()) && CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()]>0)
                     {
                         player.attack(players[(CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()])-1]);
+                    }
+
+                    if (player.getX() <= 320-(40*player.getMinRange()) && CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()]>0 && CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()]<5) {
+                        player.attack(players[(CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()])-1]);
+                    } else if (player.getX() <= 320-(40*player.getMinRange()) && CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()]>5) {
+                        player.attack(monsters[(CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()])-6]);
+                    } else if (player.getX() <= 320-(40*player.getMaxRange()) && CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()]>0 && CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()]<5) {
+                        player.attack(players[(CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()])-1]);
+                    } else if (player.getX() <= 320-(40*player.getMaxRange()) && CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()]>5) {
+                        player.attack(monsters[(CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()])-6]);
                     }
 
                     //timer

@@ -1,7 +1,10 @@
 package com.company;
 
 import com.company.classes.CharacterClass;
+import com.company.classes.MonsterClass;
 import com.company.classes.arenas.Syberia;
+import com.company.classes.monsters.Bat;
+import com.company.classes.monsters.Zombie;
 
 public class Team {
     private CharacterClass[] teamMembers;
@@ -35,6 +38,7 @@ public class Team {
     }
 
     public void runArena() {
-        MainWindow mw = new MainWindow(375, 438, this);
+        MonsterClass[] monsters = {new Zombie(this.teamMembers, 120, 160), new Bat(this.teamMembers, 160, 160), new Zombie(this.teamMembers, 200, 160)};
+        MainWindow mw = new MainWindow(375, 438, this, monsters);
     }
 }

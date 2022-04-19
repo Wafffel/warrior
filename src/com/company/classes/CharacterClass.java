@@ -132,6 +132,10 @@ public abstract class CharacterClass implements BaseClass {
         System.out.println(this.className + " attacked " + attackedPlayer.className + " for " + this.attackAmount);
     }
 
+    public void attack(MonsterClass attackedMonster) {
+        attackedMonster.reduceHealth(this.attackAmount);
+    }
+
     @Override
     public void restoreHealth(int amount) {
         setHealthPoints(this.getHealthPoints() + amount);
