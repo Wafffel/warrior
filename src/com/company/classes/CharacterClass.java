@@ -20,7 +20,7 @@ public abstract class CharacterClass implements BaseClass {
     private int maxHealthPoints;
     private int maxManaPoints;
     private int leftKey, rightKey, upKey, downKey, leftAttackKey,rightAttackKey, abilityKey;
-    protected  String className;
+    protected String className;
     private int minRange, maxRange;
 
     public CharacterClass(
@@ -274,13 +274,13 @@ public abstract class CharacterClass implements BaseClass {
         int x, y;
         boolean again = true;
         do {
-            x = (int)(Math.random()*(9));
-            y = (int)(Math.random()*(5));
-            if (!(occupiedCells[x][y]>0)) {
+            x = ((int)(Math.random()*(9)))*40;
+            y = ((int)(Math.random()*(5)))*80;
+            if (occupiedCells[x][y]==0) {
                 occupiedCells[this.x][this.y] = 0;
                 again = false;
-                this.x = x*40;
-                this.y = y*80;
+                this.x = x;
+                this.y = y;
                 occupiedCells[this.x][this.y] = this.number;
             }
         } while (again);

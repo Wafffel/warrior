@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.classes.CharacterClass;
+import com.company.classes.arenas.Syberia;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.awt.event.KeyEvent;
 public class GameField extends JPanel {
     private Team team;
     private CharacterClass[] players;
+    private Syberia map = new Syberia();
     public GameField(Team team) {
         this.team = team;
         this.players = team.getTeamMembers();
@@ -27,6 +29,9 @@ public class GameField extends JPanel {
             g.drawString(""+player.getHealthPoints(), player.getX(), player.getY()+12);
             g.drawString("steps", player.getX(), player.getY() + 26);
             System.out.println("health points =   " + player.getHealthPoints());
+        }
+        for (int[] wall : map.getWallLocation()) {
+            g.drawImage(map.getBaseImage(), wall[0], wall[1], this);
         }
     }
 
@@ -57,9 +62,9 @@ public class GameField extends JPanel {
                 if (key == player.getLeftAttackKey()) {
                     player.setAttackLeftImage();
 
-                    if (player.getX() >= 40 && CharacterClass.occupiedCells[player.getX() - 40*player.getMinRange()][player.getY()]>0) {
+                    if (player.getX() >= 0+(40*player.getMinRange()) && CharacterClass.occupiedCells[player.getX() - 40*player.getMinRange()][player.getY()]>0) {
                         player.attack(players[(CharacterClass.occupiedCells[player.getX() - 40*player.getMinRange()][player.getY()])-1]);
-                    } else if (CharacterClass.occupiedCells[player.getX() - 40*player.getMaxRange()][player.getY()]>0)
+                    } else if (player.getX() >= 0+(40*player.getMaxRange()) &&CharacterClass.occupiedCells[player.getX() - 40*player.getMaxRange()][player.getY()]>0)
                     {
                         player.attack(players[(CharacterClass.occupiedCells[player.getX() - 40*player.getMaxRange()][player.getY()])-1]);
                     }
@@ -78,9 +83,9 @@ public class GameField extends JPanel {
                 if (key == player.getRightAttackKey()) {
                     player.setAttackRightImage();
 
-                    if (player.getX() < 300 && CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()]>0) {
+                    if (player.getX() <= 320-(40*player.getMinRange()) && CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()]>0) {
                         player.attack(players[(CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()])-1]);
-                    } else if (CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()]>0)
+                    } else if (player.getX() <= 320-(40*player.getMaxRange()) && CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()]>0)
                     {
                         player.attack(players[(CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()])-1]);
                     }

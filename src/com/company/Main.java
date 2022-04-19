@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.classes.CharacterClass;
 import com.company.classes.arenas.Syberia;
 import com.company.classes.characters.Archer;
 import com.company.classes.characters.Healer;
@@ -21,10 +22,13 @@ public class Main {
                 new Healer("Radagast", 320, 320, KeyEvent.VK_NUMPAD1, KeyEvent.VK_NUMPAD3, KeyEvent.VK_NUMPAD5, KeyEvent.VK_NUMPAD2, KeyEvent.VK_NUMPAD4, KeyEvent.VK_NUMPAD6, KeyEvent.VK_NUMPAD9)
         );
         team.info();
-        Syberia arena1 = new Syberia();
-        if (team.enterArena(arena1)) {
-            team.setArena(arena1);
+        Syberia map = new Syberia();
+        if (team.enterArena(map)) {
+            team.setArena(map);
             team.runArena();
+            for (int[] wall : map.getWallLocation()) {
+                CharacterClass.occupiedCells[wall[0]][wall[1]] = 5;
+            }
         } else {
             System.out.println("Game over");
         }
