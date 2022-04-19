@@ -91,14 +91,6 @@ public class GameField extends JPanel {
                 }
                 if (key == player.getRightAttackKey()) {
                     player.setAttackRightImage();
-
-                    if (player.getX() <= 320-(40*player.getMinRange()) && CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()]>0) {
-                        player.attack(players[(CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()])-1]);
-                    } else if (player.getX() <= 320-(40*player.getMaxRange()) && CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()]>0)
-                    {
-                        player.attack(players[(CharacterClass.occupiedCells[player.getX() + 40*player.getMaxRange()][player.getY()])-1]);
-                    }
-
                     if (player.getX() <= 320-(40*player.getMinRange()) && CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()]>0 && CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()]<5) {
                         player.attack(players[(CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()])-1]);
                     } else if (player.getX() <= 320-(40*player.getMinRange()) && CharacterClass.occupiedCells[player.getX() + 40*player.getMinRange()][player.getY()]>5) {

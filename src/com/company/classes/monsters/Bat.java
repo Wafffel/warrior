@@ -10,7 +10,7 @@ public class Bat extends MonsterClass {
 
     public Bat(CharacterClass[] players, int x, int y) {
         super(players, x, y);
-        this.speed = 1000;
+        this.speed = 2000;
         this.attackAmount = 100;
         this.health = 50;
         this.maxHealth = 50;
