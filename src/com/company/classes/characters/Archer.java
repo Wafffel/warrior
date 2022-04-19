@@ -7,7 +7,7 @@ public class Archer  extends CharacterClass {
     public Archer(String name, int x, int y, int leftKey, int rightKey, int upKey, int downKey, int leftAttackKey, int rightAttackKey, int abilityKey) {
         super(name, x, y, leftKey, rightKey, upKey, downKey, leftAttackKey, rightAttackKey,1,2, abilityKey);
         this.setAttackAmount(50);
-        this.setMaxHealthPoints(1000);
+        this.setMaxHealthPoints(500);
         setHealthPoints(500);
         this.className = "Archer";
         /*this.setLevel(1);

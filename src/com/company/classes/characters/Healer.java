@@ -3,12 +3,16 @@ package com.company.classes.characters;
 import com.company.classes.AttackType;
 import com.company.classes.CharacterClass;
 
+import javax.management.timer.TimerMBean;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Healer extends CharacterClass {
     public Healer(String name, int x, int y, int leftKey, int rightKey, int upKey, int downKey, int leftAttackKey, int rightAttackKey, int abilityKey) {
         super(name, x, y, leftKey, rightKey, upKey, downKey, leftAttackKey, rightAttackKey,1,1, abilityKey);
         this.setAttackAmount(50);
         this.setMaxHealthPoints(500);
-        setHealthPoints(1000);
+        setHealthPoints(500);
         this.className = "Warior";
         /*this.setLevel(1);
         this.setMaxHealthPoints(1000);
@@ -47,6 +51,22 @@ public class Healer extends CharacterClass {
 
     @Override
     public void ability() {
-        this.restoreHealth(100);
+        if (!onCooldown) {
+            this.restoreHealth(100);
+            this.onCooldown = true;
+            Healer thisPlayer = this;
+            Timer timer = new Timer();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    thisPlayer.endCooldown();
+                }
+            };
+            timer.schedule(task, 5000);
+        }
+    }
+
+    public void endCooldown() {
+        this.onCooldown = false;
     }
 }

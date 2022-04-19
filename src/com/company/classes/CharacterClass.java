@@ -1,9 +1,13 @@
 package com.company.classes;
 
+import com.company.GameField;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 
 public abstract class CharacterClass implements BaseClass {
+    public boolean onCooldown = false;
     public static int[][] occupiedCells = new int[321][321];
     public static int playerCount = 0;
     private int number;
@@ -39,8 +43,9 @@ public abstract class CharacterClass implements BaseClass {
 
     public void setHealthPoints(int healthPoints) {
         System.out.println("SET HP1 " + healthPoints);
-        if (healthPoints < 0) {
+        if (healthPoints <= 0) {
             this.healthPoints = 0;
+            this.dead();
         } else if (healthPoints > this.maxHealthPoints) {
             this.healthPoints = this.maxHealthPoints;
         }
@@ -262,5 +267,22 @@ public abstract class CharacterClass implements BaseClass {
 
     public int getAbilityKey() {
         return abilityKey;
+    }
+
+    public void dead() {
+        this.healthPoints = this.maxHealthPoints;
+        int x, y;
+        boolean again = true;
+        do {
+            x = (int)(Math.random()*(9));
+            y = (int)(Math.random()*(5));
+            if (!(occupiedCells[x][y]>0)) {
+                occupiedCells[this.x][this.y] = 0;
+                again = false;
+                this.x = x*40;
+                this.y = y*80;
+                occupiedCells[this.x][this.y] = this.number;
+            }
+        } while (again);
     }
 }

@@ -30,6 +30,8 @@ public class GameField extends JPanel {
         }
     }
 
+
+
     public class FieldKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {

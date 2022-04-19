@@ -7,7 +7,7 @@ public class Mage  extends CharacterClass {
     public Mage(String name, int x, int y, int leftKey, int rightKey, int upKey, int downKey, int leftAttackKey, int rightAttackKey, int abilityKey) {
         super(name, x, y, leftKey, rightKey, upKey, downKey, leftAttackKey, rightAttackKey,2,2, abilityKey);
         this.setAttackAmount(100);
-        this.setMaxHealthPoints(1000);
+        this.setMaxHealthPoints(300);
         setHealthPoints(300);
         this.className = "Mage";
         /*this.setLevel(1);
