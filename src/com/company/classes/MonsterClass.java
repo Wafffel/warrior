@@ -15,17 +15,25 @@ public class MonsterClass {
     protected Image image;
     private int x, y;
     private CharacterClass[] players;
+    public static int currentMonsters = 0;
 
-    public MonsterClass(CharacterClass[] players, int x, int y) {
+    public MonsterClass(CharacterClass[] players) {
         this.number = ++this.monsterCount;
         this.players = players;
-        CharacterClass.occupiedCells[x][y] = number;
-        this.spawn(x, y);
+        this.spawn();
     }
 
-    public void spawn(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public void spawn() {
+        int x = ((int)(Math.random()*(9)))*40;
+        int y = ((int)(Math.random()*(5)))*80;
+        if (CharacterClass.occupiedCells[x][y]==0) {
+            this.x = x;
+            this.y = y;
+            currentMonsters++;
+        } else {
+            this.spawn();
+        }
+        CharacterClass.occupiedCells[x][y] = number;
         MonsterClass thisMonster = this;
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
@@ -123,17 +131,14 @@ public class MonsterClass {
         return image;
     }
 
-    public void reduceHealth(int amount) {
+    public void reduceHealth(int amount, CharacterClass attackingPlayer) {
         this.health -= amount;
         System.out.println("monster: "+ this.health);
         if (this.health <= 0) {
             this.health = this.maxHealth;
             CharacterClass.occupiedCells[this.x][this.y] = 0;
-            do {
-                int x = ((int)(Math.random()*(10)))*40;
-                int y = ((int)(Math.random()*(6)))*80;
-            } while(CharacterClass.occupiedCells[x][y] == 0);
-            this.spawn(x,y);
+            this.spawn();
+            attackingPlayer.setMonstersKilled(attackingPlayer.getMonstersKilled()+1);
         }
     }
 

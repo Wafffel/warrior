@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class Zombie extends MonsterClass {
 
-    public Zombie(CharacterClass[] players, int x, int y) {
-        super(players, x, y);
+    public Zombie(CharacterClass[] players) {
+        super(players);
         this.speed = 2000;
         this.attackAmount = 100;
         this.health = 200;

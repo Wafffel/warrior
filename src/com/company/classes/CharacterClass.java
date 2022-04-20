@@ -22,6 +22,7 @@ public abstract class CharacterClass implements BaseClass {
     private int leftKey, rightKey, upKey, downKey, leftAttackKey,rightAttackKey, abilityKey;
     protected String className;
     private int minRange, maxRange;
+    private int monstersKilled;
 
     public CharacterClass(
             String name, int x, int y, int leftKey, int rightKey, int upKey, int downKey, int leftAttackKey, int rightAttackKey, int minRange, int maxRange, int abilityKey) {
@@ -133,7 +134,7 @@ public abstract class CharacterClass implements BaseClass {
     }
 
     public void attack(MonsterClass attackedMonster) {
-        attackedMonster.reduceHealth(this.attackAmount);
+        attackedMonster.reduceHealth(this.attackAmount, this);
     }
 
     @Override
@@ -288,5 +289,14 @@ public abstract class CharacterClass implements BaseClass {
                 occupiedCells[this.x][this.y] = this.number;
             }
         } while (again);
+    }
+
+    public void setMonstersKilled(int monstersKilled) {
+        this.monstersKilled = monstersKilled;
+    }
+
+    public int getMonstersKilled() {
+
+        return monstersKilled;
     }
 }

@@ -8,6 +8,7 @@ import com.company.classes.monsters.Zombie;
 
 public class Team {
     private CharacterClass[] teamMembers;
+    public static int i = 0;
 
     public void setArena(Syberia arena) {
         this.arena = arena;
@@ -38,7 +39,25 @@ public class Team {
     }
 
     public void runArena() {
-        MonsterClass[] monsters = {new Zombie(this.teamMembers, 120, 160), new Bat(this.teamMembers, 160, 160), new Zombie(this.teamMembers, 200, 160)};
+        MonsterClass[] monsters = new MonsterClass[999];
+        monsters[i] = new Bat(this.teamMembers);
         MainWindow mw = new MainWindow(375, 438, this, monsters);
+        this.spawnMonsters();
+    }
+
+    public void spawnMonsters() {
+        Team thisTeam = this;
+        if (MonsterClass.currentMonsters <= 3) {
+            i++;
+            GameField.monsters[i] = new Zombie(this.teamMembers);
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            thisTeam.spawnMonsters();
+                        }
+                    }, 5000
+            );
+        }
     }
 }

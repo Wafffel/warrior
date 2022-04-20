@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
 public class GameField extends JPanel {
     private Team team;
     private CharacterClass[] players;
-    private MonsterClass[] monsters;
+    public static MonsterClass[] monsters;
     private Syberia map = new Syberia();
     public GameField(Team team, MonsterClass[] monsters) {
         this.team = team;
@@ -22,6 +22,7 @@ public class GameField extends JPanel {
         addKeyListener(new FieldKeyListener());
     }
 
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -29,15 +30,15 @@ public class GameField extends JPanel {
         for (CharacterClass player : players) {
             g.drawImage(player.getImage(), player.getX(), player.getY(), this);
             g.drawString(""+player.getHealthPoints(), player.getX(), player.getY()+12);
-            g.drawString("steps", player.getX(), player.getY() + 26);
-            System.out.println("health points =   " + player.getHealthPoints());
+            g.drawString("kills: "+player.getMonstersKilled(), player.getX(), player.getY() + 26);
+            System.out.println("health points: " + player.getHealthPoints());
         }
         for (int[] wall : map.getWallLocation()) {
             g.drawImage(map.getBaseImage(), wall[0], wall[1], this);
         }
-        for (MonsterClass monster : monsters) {
-            g.drawImage(monster.getImage(), monster.getX(), monster.getY(), this);
-            g.drawString(""+monster.getHealth(), monster.getX(), monster.getY()+12);
+        for (int j=0; j<=Team.i; j++) {
+            g.drawImage(monsters[j].getImage(), monsters[j].getX(), monsters[j].getY(), this);
+            g.drawString(""+monsters[j].getHealth(), monsters[j].getX(), monsters[j].getY()+12);
         }
     }
 
