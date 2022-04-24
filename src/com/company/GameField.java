@@ -37,8 +37,10 @@ public class GameField extends JPanel {
             g.drawImage(map.getBaseImage(), wall[0], wall[1], this);
         }
         for (int j=0; j<=Team.i; j++) {
-            g.drawImage(monsters[j].getImage(), monsters[j].getX(), monsters[j].getY(), this);
-            g.drawString(""+monsters[j].getHealth(), monsters[j].getX(), monsters[j].getY()+12);
+            if (monsters[j].isAlive()) {
+                g.drawImage(monsters[j].getImage(), monsters[j].getX(), monsters[j].getY(), this);
+                g.drawString("" + monsters[j].getHealth(), monsters[j].getX(), monsters[j].getY() + 12);
+            }
         }
     }
 

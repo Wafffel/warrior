@@ -16,6 +16,7 @@ public class MonsterClass {
     private int x, y;
     private CharacterClass[] players;
     public static int currentMonsters = 0;
+    private boolean alive = true;
 
     public MonsterClass(CharacterClass[] players) {
         this.number = ++this.monsterCount;
@@ -51,68 +52,70 @@ public class MonsterClass {
     }
 
     public void move() throws AWTException {
-        Robot robot = new Robot();
-        System.out.println("move");
-        int direction = ((int)(Math.random()*(4)));
-        switch (direction) {
-            case 0:
-                System.out.println("0");
-                if (this.y<320 && CharacterClass.occupiedCells[this.x][this.y+80]==0) {
-                    CharacterClass.occupiedCells[this.x][this.y] = 0;
-                    this.y += 80;
-                    CharacterClass.occupiedCells[this.x][this.y] = number;
-                } else if (this.y<320 && CharacterClass.occupiedCells[this.x][this.y+80]>0 && CharacterClass.occupiedCells[this.x][this.y+80]<5) {
-                    this.attack(players[(CharacterClass.occupiedCells[this.getX()][this.getY()+80])-1]);
-                }
-                robot.keyPress(KeyEvent.VK_HOME);
-                break;
-            case 1:
-                System.out.println("1");
-                if (this.x<320 && CharacterClass.occupiedCells[this.x+40][this.y]==0) {
-                    CharacterClass.occupiedCells[this.x][this.y] = 0;
-                    this.x += 40;
-                    CharacterClass.occupiedCells[this.x][this.y] = number;
-                } else if (this.x<320 && CharacterClass.occupiedCells[this.x+40][this.y]>0 && CharacterClass.occupiedCells[this.x+40][this.y]<5) {
-                    this.attack(players[(CharacterClass.occupiedCells[this.getX()+40][this.getY()])-1]);
-                }
-                robot.keyPress(KeyEvent.VK_HOME);
-                break;
-            case 2:
-                System.out.println("2");
-                if (this.y>0 && CharacterClass.occupiedCells[this.x][this.y-80]==0) {
-                    CharacterClass.occupiedCells[this.x][this.y] = 0;
-                    this.y -= 80;
-                    CharacterClass.occupiedCells[this.x][this.y] = number;
-                } else if (this.y>0 && CharacterClass.occupiedCells[this.x][this.y-80]>0 && CharacterClass.occupiedCells[this.x][this.y-80]<5) {
-                    this.attack(players[(CharacterClass.occupiedCells[this.getX()][this.getY()-80])-1]);
-                }
-                robot.keyPress(KeyEvent.VK_HOME);
-                break;
-            case 3:
-                System.out.println("3");
-                if (this.x>0 && CharacterClass.occupiedCells[this.x-40][this.y]==0) {
-                    CharacterClass.occupiedCells[this.x][this.y] = 0;
-                    this.x -= 40;
-                    CharacterClass.occupiedCells[this.x][this.y] = number;
-                } else if (this.x>0 && CharacterClass.occupiedCells[this.x-40][this.y]>0 && CharacterClass.occupiedCells[this.x-40][this.y]<5) {
-                    this.attack(players[(CharacterClass.occupiedCells[this.getX()-40][this.getY()])-1]);
-                }
-                robot.keyPress(KeyEvent.VK_HOME);
-                break;
-        }
-        MonsterClass thisMonster = this;
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        try {
-                            thisMonster.move();
-                        } catch (AWTException e) {
-                            e.printStackTrace();
-                        }
+        if (alive) {
+            Robot robot = new Robot();
+            System.out.println("move");
+            int direction = ((int) (Math.random() * (4)));
+            switch (direction) {
+                case 0:
+                    System.out.println("0");
+                    if (this.y < 320 && CharacterClass.occupiedCells[this.x][this.y + 80] == 0) {
+                        CharacterClass.occupiedCells[this.x][this.y] = 0;
+                        this.y += 80;
+                        CharacterClass.occupiedCells[this.x][this.y] = number;
+                    } else if (this.y < 320 && CharacterClass.occupiedCells[this.x][this.y + 80] > 0 && CharacterClass.occupiedCells[this.x][this.y + 80] < 5) {
+                        this.attack(players[(CharacterClass.occupiedCells[this.getX()][this.getY() + 80]) - 1]);
                     }
-                }, speed
-        );
+                    robot.keyPress(KeyEvent.VK_HOME);
+                    break;
+                case 1:
+                    System.out.println("1");
+                    if (this.x < 320 && CharacterClass.occupiedCells[this.x + 40][this.y] == 0) {
+                        CharacterClass.occupiedCells[this.x][this.y] = 0;
+                        this.x += 40;
+                        CharacterClass.occupiedCells[this.x][this.y] = number;
+                    } else if (this.x < 320 && CharacterClass.occupiedCells[this.x + 40][this.y] > 0 && CharacterClass.occupiedCells[this.x + 40][this.y] < 5) {
+                        this.attack(players[(CharacterClass.occupiedCells[this.getX() + 40][this.getY()]) - 1]);
+                    }
+                    robot.keyPress(KeyEvent.VK_HOME);
+                    break;
+                case 2:
+                    System.out.println("2");
+                    if (this.y > 0 && CharacterClass.occupiedCells[this.x][this.y - 80] == 0) {
+                        CharacterClass.occupiedCells[this.x][this.y] = 0;
+                        this.y -= 80;
+                        CharacterClass.occupiedCells[this.x][this.y] = number;
+                    } else if (this.y > 0 && CharacterClass.occupiedCells[this.x][this.y - 80] > 0 && CharacterClass.occupiedCells[this.x][this.y - 80] < 5) {
+                        this.attack(players[(CharacterClass.occupiedCells[this.getX()][this.getY() - 80]) - 1]);
+                    }
+                    robot.keyPress(KeyEvent.VK_HOME);
+                    break;
+                case 3:
+                    System.out.println("3");
+                    if (this.x > 0 && CharacterClass.occupiedCells[this.x - 40][this.y] == 0) {
+                        CharacterClass.occupiedCells[this.x][this.y] = 0;
+                        this.x -= 40;
+                        CharacterClass.occupiedCells[this.x][this.y] = number;
+                    } else if (this.x > 0 && CharacterClass.occupiedCells[this.x - 40][this.y] > 0 && CharacterClass.occupiedCells[this.x - 40][this.y] < 5) {
+                        this.attack(players[(CharacterClass.occupiedCells[this.getX() - 40][this.getY()]) - 1]);
+                    }
+                    robot.keyPress(KeyEvent.VK_HOME);
+                    break;
+            }
+            MonsterClass thisMonster = this;
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            try {
+                                thisMonster.move();
+                            } catch (AWTException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, speed
+            );
+        }
     }
 
     public void attack(CharacterClass attackedPlayer) {
@@ -135,14 +138,18 @@ public class MonsterClass {
         this.health -= amount;
         System.out.println("monster: "+ this.health);
         if (this.health <= 0) {
-            this.health = this.maxHealth;
+            this.alive = false;
             CharacterClass.occupiedCells[this.x][this.y] = 0;
-            this.spawn();
             attackingPlayer.setMonstersKilled(attackingPlayer.getMonstersKilled()+1);
+            currentMonsters--;
         }
     }
 
     public int getHealth() {
         return health;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }
