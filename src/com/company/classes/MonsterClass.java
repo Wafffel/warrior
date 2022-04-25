@@ -66,7 +66,7 @@ public class MonsterClass {
                     } else if (this.y < 320 && CharacterClass.occupiedCells[this.x][this.y + 80] > 0 && CharacterClass.occupiedCells[this.x][this.y + 80] < 5) {
                         this.attack(players[(CharacterClass.occupiedCells[this.getX()][this.getY() + 80]) - 1]);
                     }
-                    robot.keyPress(KeyEvent.VK_HOME);
+                    robot.keyPress(KeyEvent.VK_CONTROL);
                     break;
                 case 1:
                     System.out.println("1");
@@ -77,7 +77,7 @@ public class MonsterClass {
                     } else if (this.x < 320 && CharacterClass.occupiedCells[this.x + 40][this.y] > 0 && CharacterClass.occupiedCells[this.x + 40][this.y] < 5) {
                         this.attack(players[(CharacterClass.occupiedCells[this.getX() + 40][this.getY()]) - 1]);
                     }
-                    robot.keyPress(KeyEvent.VK_HOME);
+                    robot.keyPress(KeyEvent.VK_CONTROL);
                     break;
                 case 2:
                     System.out.println("2");
@@ -88,7 +88,7 @@ public class MonsterClass {
                     } else if (this.y > 0 && CharacterClass.occupiedCells[this.x][this.y - 80] > 0 && CharacterClass.occupiedCells[this.x][this.y - 80] < 5) {
                         this.attack(players[(CharacterClass.occupiedCells[this.getX()][this.getY() - 80]) - 1]);
                     }
-                    robot.keyPress(KeyEvent.VK_HOME);
+                    robot.keyPress(KeyEvent.VK_CONTROL);
                     break;
                 case 3:
                     System.out.println("3");
@@ -99,7 +99,7 @@ public class MonsterClass {
                     } else if (this.x > 0 && CharacterClass.occupiedCells[this.x - 40][this.y] > 0 && CharacterClass.occupiedCells[this.x - 40][this.y] < 5) {
                         this.attack(players[(CharacterClass.occupiedCells[this.getX() - 40][this.getY()]) - 1]);
                     }
-                    robot.keyPress(KeyEvent.VK_HOME);
+                    robot.keyPress(KeyEvent.VK_CONTROL);
                     break;
             }
             MonsterClass thisMonster = this;

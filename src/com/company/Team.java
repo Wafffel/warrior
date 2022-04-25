@@ -39,6 +39,10 @@ public class Team {
     }
 
     public void runArena() {
+        MenuWindow menuWindow = new MenuWindow(200, 200, this);
+    }
+
+    public void start() {
         MonsterClass[] monsters = new MonsterClass[999];
         monsters[i] = new Bat(this.teamMembers);
         MainWindow mw = new MainWindow(375, 438, this, monsters);
