@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.classes.ArenaBase;
 import com.company.classes.CharacterClass;
 import com.company.classes.MonsterClass;
 import com.company.classes.arenas.Syberia;
@@ -9,12 +10,12 @@ import com.company.classes.monsters.Zombie;
 public class Team {
     private CharacterClass[] teamMembers;
     public static int i = 0;
+    private ArenaBase arena;
 
-    public void setArena(Syberia arena) {
+    public void setArena(ArenaBase arena) {
         this.arena = arena;
     }
 
-    private Syberia arena;
     public Team(CharacterClass... members) {
         teamMembers = new CharacterClass[members.length];
 
@@ -28,19 +29,18 @@ public class Team {
     }
 
     public void info(){
-        //for(int i = 0; i < teamMembers.length; i++){
         for(CharacterClass teamMembers : teamMembers){
             teamMembers.info();
         }
     }
 
-    public boolean enterArena(Syberia arena1) {
+    public boolean enterArena(ArenaBase arena1) {
         return arena1.open(this);
     }
 
-    public void runArena() {
-        MenuWindow menuWindow = new MenuWindow(200, 200, this);
-    }
+    //public void runArena() {
+      //  MenuWindow menuWindow = new MenuWindow(200, 200);
+    //}
 
     public void start() {
         MonsterClass[] monsters = new MonsterClass[999];
@@ -63,5 +63,9 @@ public class Team {
                     }, 5000
             );
         }
+    }
+
+    public ArenaBase getArena() {
+        return arena;
     }
 }

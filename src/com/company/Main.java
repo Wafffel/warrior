@@ -14,23 +14,7 @@ public class Main {
     public static void main(String[] args) {
         //Warrior war1 = new Warrior("NAme");
         //war1.info();
+        MenuWindow menuWindow = new MenuWindow(200, 200);
 
-        Team team = new Team (
-            new Warrior("Aragorn", 0, 0, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_Q, KeyEvent.VK_E, 0),
-                new Mage("Gendolf", 0, 320, KeyEvent.VK_H, KeyEvent.VK_K, KeyEvent.VK_U, KeyEvent.VK_J, KeyEvent.VK_Y, KeyEvent.VK_I, 0),
-            new Archer("Legolas", 320, 0, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_DELETE, KeyEvent.VK_PAGE_DOWN, 0),
-                new Healer("Radagast", 320, 320, KeyEvent.VK_NUMPAD1, KeyEvent.VK_NUMPAD3, KeyEvent.VK_NUMPAD5, KeyEvent.VK_NUMPAD2, KeyEvent.VK_NUMPAD4, KeyEvent.VK_NUMPAD6, KeyEvent.VK_NUMPAD9)
-        );
-        team.info();
-        Syberia map = new Syberia();
-        if (team.enterArena(map)) {
-            team.setArena(map);
-            team.runArena();
-            for (int[] wall : map.getWallLocation()) {
-                CharacterClass.occupiedCells[wall[0]][wall[1]] = 5;
-            }
-        } else {
-            System.out.println("Game over");
-        }
     }
 }

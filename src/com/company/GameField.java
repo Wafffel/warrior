@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.classes.ArenaBase;
 import com.company.classes.CharacterClass;
 import com.company.classes.MonsterClass;
 import com.company.classes.arenas.Syberia;
@@ -13,11 +14,12 @@ public class GameField extends JPanel {
     private Team team;
     private CharacterClass[] players;
     public static MonsterClass[] monsters;
-    private Syberia map = new Syberia();
+    private ArenaBase map;
     public GameField(Team team, MonsterClass[] monsters) {
         this.team = team;
         this.players = team.getTeamMembers();
         this.monsters = monsters;
+        this.map = team.getArena();
         setFocusable(true);
         addKeyListener(new FieldKeyListener());
     }
